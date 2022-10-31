@@ -16,11 +16,13 @@ if [ -x ${GH_ACCESS_TOKEN} ]; then
     exit 1
 fi
 
-NODE_NAME=$HOST
-if [ -z "$HOST" ]
+NODE_NAME=$(hostname)
+if [ -z "$NODE_NAME" ]
 then
     NODE_NAME=$(uname -r)
 fi
+
+echo "[*] Set action runner name as $NODE_NAME"
 
 rm -rf actions-runner
 mkdir -p actions-runner

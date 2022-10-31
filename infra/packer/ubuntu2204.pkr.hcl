@@ -23,12 +23,17 @@ source "amazon-ebs" "ubuntu" {
   ssh_username = "ubuntu"
 }
 
+variable "GH_ACCESS_TOKEN" {
+  type = string
+}
+
+
 build {
   name    = "ubuntu-jammy-22"
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
   provisioner "shell-local" {
-    script = "../gh-actions-runner-configure.sh
+    script = "hostnamectl set-hostname --static ubuntu2204 && GH_ACCESS_TOKEN=${var.GH_ACCESS_TOKEN} ../gh-actions-runner-configure.sh
   }
 }
